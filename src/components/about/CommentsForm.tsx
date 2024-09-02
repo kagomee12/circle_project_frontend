@@ -23,6 +23,8 @@ const Commentsinput = () => {
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
+    console.log('cek');
+    
 
     const formData = new FormData();
     formData.append("content", content);
@@ -34,7 +36,6 @@ const Commentsinput = () => {
     }
 
     await posting(formData);
-    console.log('cek');
     
     getPosts()
     toast.success("post Added", { autoClose: 2000 });
