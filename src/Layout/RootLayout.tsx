@@ -1,4 +1,4 @@
-import {Navigate, Outlet, useLocation} from "react-router-dom"
+import {Navigate, Outlet} from "react-router-dom"
 import Profil from "../components/about/Profil"
 import { Box } from "@mui/material"
 import Sidebar from "../components/about/Navbar"
@@ -6,7 +6,7 @@ import useStore from "../stores/hook"
 
 const RootLayout = () => {
     const { isLogin } = useStore()
-    const { pathname } = useLocation()
+    // const { pathname } = useLocation()
     
     if(!isLogin){
         return <Navigate to= "/Login"/>
