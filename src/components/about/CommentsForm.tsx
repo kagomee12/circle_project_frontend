@@ -33,7 +33,9 @@ const Commentsinput = () => {
       }
     }
 
-    await posting(formData);
+    const data = await posting(formData);
+    console.log(data);
+    
     getPosts()
     toast.success("post Added", { autoClose: 2000 });
   };

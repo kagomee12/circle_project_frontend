@@ -77,9 +77,7 @@ export default function ModalEditProfile() {
     formData.append("bio", bio);
 
     
-    const app = await updateProfile(user.id, formData);
-    console.log(app);
-    
+    await updateProfile(user.id, formData);
     await getPosts()
 
    const data = await findUser(user.id);
