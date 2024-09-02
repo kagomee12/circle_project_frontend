@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const reply = async (id: number,content: string) => {
+export const reply = async (post_id: number,formData: any) => {
     try {
-        const res= await axios.post(`http://localhost:3000/reply/${id}`, {
-            content: content,
-        },{
+        const res= await axios.post(`http://localhost:3000/reply/${post_id}`, 
+            formData
+        ,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }

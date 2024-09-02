@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import Commentsinput from "../components/about/CommentsForm";
-import { useComment } from "../stores/useComments";
+
 import CommentItem from "../components/about/commentRender";
-import useStore from "../stores/hook";
+
 // import { getPosts, posting } from "../lib/api/call/post";
 
 const Home = () => {

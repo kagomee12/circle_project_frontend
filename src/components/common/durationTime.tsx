@@ -16,13 +16,13 @@ export const Timeinfo: React.FC<timeProps>= ({ time }) => {
     const distanceMounth = Math.floor(distance / 1000 / 60 / 60 / 24 / 30);
   
     if (distanceMounth > 0) {
-      return (<>{distanceMounth} Mounth Ago</>);
+      return (<>{distanceMounth}y</>);
     } else if (distanceDay > 0) {
-      return (<>{distanceDay} day Ago</>);
+      return (<>{distanceDay}d</>);
     } else if (distanceHours > 0) {
-      return (<>{distanceHours} hours Ago</>);
+      return (<>{distanceHours}h</>);
     } else if (distanceMinutes > 0) {
-      return (<>{distanceMinutes} minutes Ago</>);
+      return (<>{distanceMinutes}m</>);
     } else if (distanceSeconds > 0) {
       return (<>just now</>);
     }

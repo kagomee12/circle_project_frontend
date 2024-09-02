@@ -5,6 +5,7 @@ import { ILoginForm } from "../../Types/login";
 import CustomInput from "../common/Input";
 import { useValidationLogin } from "../../stores/hooks/useValidationLogin";
 import { useLoginFunction } from "../../stores/hooks/useloginfunction";
+import { toast } from "react-toastify";
 
 
 
@@ -14,6 +15,7 @@ const LoginForm = () => {
    const handleOnSubmit: SubmitHandler<ILoginForm> = async (data ) => {
       try {
          await loginFunc.login(data.email, data.password);
+         toast.success("Login Successful", {autoClose: 2000});
       } catch (error) {
          console.log(error);
       }

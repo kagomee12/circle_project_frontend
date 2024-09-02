@@ -26,7 +26,10 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
     "react-router-dom": "^6.24.1",
+    "react-toastify": "^10.0.5",
     "styled-components": "^6.1.11",
+    "toast": "^0.5.4",
+    "toast-react": "^1.0.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

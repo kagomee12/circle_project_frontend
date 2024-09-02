@@ -1,11 +1,20 @@
+import { IContent } from "./content";
+import { Ifollower, Ifollowing,Ifolloweruser,Ifollowinguser } from "./follow";
+
 export interface IStoreStates {
     user: IUser;
+    post: IContent[];
+    following: Ifollowing[];
+    followers: Ifollower[]
     isLogin: boolean;
  }
  
  export interface IStoreActions {
     setUserState: (user: IUser) => void;
     clearUser: () => void;
+    getPosts: () => Promise<void>;
+    getInfoFollower: (followerId: number) => Promise<void>;
+    getInfoFollowing: (followingId: number) => Promise<void>
  }
  
  export interface IUser {
@@ -14,6 +23,7 @@ export interface IStoreStates {
     email: string;
     fullName: string;
     profile?: IProfile;
+    bio?: string;
  }
 
  export interface IAllUser {
@@ -24,12 +34,12 @@ export interface IStoreStates {
     profil_pic?: string,
     banner_pic?: string,
     post?: Ipost
+    bio?: string
  }
 
  export interface IProfile {
-    avatar: string;
-    banner: string;
-    bio: string;
+    profil_pic: string;
+    banner_pic: string;
  }
 
 

@@ -1,46 +1,55 @@
-import { Box, Button, FormControl, FormHelperText, Input } from "@mui/material";
-
+import { Avatar, Box, Button, IconButton } from "@mui/material";
 import hutao from "../../assets/images/hutao_pasphoto.jpeg";
-
 import SendIcon from "@mui/icons-material/Send";
 
-import { useCommentsvalidation } from "../../stores/hooks/useCommentsvalidation";
 import { posting } from "../../lib/api/call/post";
-import { Controller } from "react-hook-form";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import CustomInput from "../common/Input";
+import { useState } from "react";
+import useStore from "../../stores/hook";
+import { toast } from "react-toastify";
 
 const Commentsinput = () => {
-//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     if (event.target.files) {
-//        const fileArray = Array.from(event.target.files)
-//        Promise.all(
-//           fileArray.map(async (file) => {
-//              return new Promise((resolve, reject) => {
-//                 const reader = new FileReader();
-//                 reader.readAsDataURL(file);
-//                 reader.onload = () => resolve(reader.result);
-//                 reader.onerror = (error) => reject(error);   
-//              })
-//           }
-//        )
-//     )
-//     }
-//  }
-  const { handleSubmit, reset, control } = useCommentsvalidation();
-  const onSubmit = async (data: { content: string}) => {
-    await posting(data.content);
-    reset();
+  const {getPosts, user} = useStore();
+  const [content, setContent] = useState<string>("");
+  const [image, setImage] = useState<any>(null);
+  const BaseURL = "http://localhost:3000/uploads/";
+  const handleFileChange = (event: any) => {
+    if (event.target.files) {
+      setImage(event.target.files);
+    }
   };
-  const onError = (errors: any) => {
-    console.log(errors);
+  const handleContentChange = (event: any) => {
+    setContent(event.target.value);
   };
 
+  const onSubmit = async (event: any) => {
+    event.preventDefault();
 
+    const formData = new FormData();
+    formData.append("content", content);
+
+    if (image) {
+      for (let i = 0; i < image.length; i++) {
+        formData.append("image", image[i]);
+      }
+    }
+
+    await posting(formData);
+    getPosts()
+    toast.success("post Added", { autoClose: 2000 });
+  };
 
   // const onSubmit: SubmitHandler<IComment> = data => (setCommentsState([...comments,data]), reset()) onSubmit={handleSubmit(onSubmit)}
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)}>
+    <form
+      onSubmit={(event) => {
+        onSubmit(event);
+        setContent("");
+        setImage(null);
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -48,7 +57,7 @@ const Commentsinput = () => {
           width: "90%",
           alignItems: "center",
           height: "min-content",
-          gap: "10px",
+          gap: "5px",
           margin: "auto",
         }}
       >
@@ -72,45 +81,41 @@ const Commentsinput = () => {
               alignItems: "center",
             }}
           >
-            <img
-              src={hutao}
+            <Avatar
+              src={`${BaseURL}${user.profile?.profil_pic}`}
               style={{ width: "50px", height: "50px", borderRadius: "100%" }}
               alt="profile"
             />
           </Box>
         </Box>
-        <Box sx={{ display: "flex", flex: "8",width: "100%" }}>
-          <Controller
-            control={control}
+        <Box sx={{ display: "flex", flex: "8", width: "70%" }}>
+          <CustomInput
             name="content"
-            render={({ field, fieldState }) => (
-              <FormControl error={Boolean(fieldState.error)}>
-                <CustomInput
-                  placeholder="what do you think ?"
-                  sx={{ mb: 2, width: "100%", border: "1 px solid white" }}
-                  {...field}
-                />
-                {Boolean(fieldState.error) && (
-                  <FormHelperText>{fieldState.error?.message}</FormHelperText>
-                )}
-              </FormControl>
-            )}
+            placeholder="what do you think ?"
+            value={content}
+            onChange={handleContentChange}
           />
-          {/* <Controller
-            control={control}
-            name="images"
-            render={({ field, fieldState }) => (
-              <FormControl error={Boolean(fieldState.error)}>
-                <Input type="file" placeholder="Type Fullname"
-                 onChange={handleChange} 
-                 />
-                {Boolean(fieldState.error) && (
-                  <FormHelperText>{fieldState.error?.message}</FormHelperText>
-                )}
-              </FormControl>
-            )}
-          /> */}
+          <input
+            type="file"
+            name="image"
+            multiple
+            onChange={handleFileChange}
+            id="image"
+            style={{ display: "none" }}
+          />
         </Box>
+        <label htmlFor="image">
+          <InsertPhotoIcon
+            sx={{
+              color: "white",
+              cursor: "pointer",
+              "&:hover": {
+                color: "green",
+              },
+            }}
+            fontSize="large"
+          />
+        </label>
         <Box sx={{ display: "flex", flex: "1" }}>
           <Button type="submit" variant="contained" color="success">
             <SendIcon />

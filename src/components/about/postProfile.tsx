@@ -7,7 +7,7 @@ import useStore from "../../stores/hook";
 import { useComment } from "../../stores/useComments";
 import CommentItem from "./commentRender";
 import { Box } from "@mui/material";
-import CommentItembyuserId from "./commentbyuseridRender";
+import {CommentItembyuserId, StandardImageList} from "./commentbyuseridRender";
 
 interface Props {
   user_id: number;
@@ -38,7 +38,7 @@ export default function PostProfile({user_id}: Props) {
         <CommentItembyuserId user_id ={user_id? user_id : 0}  />
       </TabPanel>
       <TabPanel value={1} sx={{ width: "100%" }}>
-        <b>Second</b>
+        <StandardImageList user_id={user_id}/>
       </TabPanel>
     </Tabs>
     </Box>

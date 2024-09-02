@@ -1,11 +1,15 @@
-import image from "../../assets/images/image.png";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
+
+import images from "../../assets/images/plain-default-lime-green-neon-solid-color-background-empty-space-anything-studio-room-display-ad-product-220898415.jpg";
 import useStore from "../../stores/hook";
-import { Box } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import { GetInfoFollow } from "../common/countingFollow";
+import ModalEditProfile from "./modalsEditProfile";
+
+
 
 const Profilebox = () => {
   const { user } = useStore();
+  const BaseURL = "http://localhost:3000/uploads/";
 
   return (
     <>
@@ -18,18 +22,20 @@ const Profilebox = () => {
           height: "75px",
           backgroundColor: "wheat",
           borderRadius: "10px",
+          display: "flex"
         }}
       >
         <img
-          src={images}
+          src={user.profile?.banner_pic ? `${BaseURL}${user.profile?.banner_pic}`: images}
           style={{
             objectFit: "cover",
             width: "100%",
+            height: "100%",
             borderRadius: "10px",
-            maxHeight: "75px",
           }}
         />
       </Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box
         style={{
           width: "80px",
@@ -39,12 +45,17 @@ const Profilebox = () => {
           marginTop: "-30px",
           marginLeft: "20px",
           border: "solid rgb(33, 37, 41)",
+          display: "flex",
         }}
       >
-        <img
-          src={image}
-          style={{ objectFit: "cover", width: "100%", borderRadius: "100%" }}
+        <Avatar
+          src={`${BaseURL}${user.profile?.profil_pic}`}
+          style={{ objectFit: "cover", width: "100%",height: "100%", borderRadius: "100%" }}
         />
+      </Box>
+      <Box>
+        <ModalEditProfile/>
+      </Box>
       </Box>
       <Box style={{ paddingLeft: "25px", marginTop: "-20px" }}>
         <h2 style={{ color: "white" }}>{user?.fullName}</h2>
@@ -58,8 +69,13 @@ const Profilebox = () => {
       >
         <p style={{ color: "white" }}>@{user.username}</p>
       </Box>
+      <Box>
+        <Typography sx={{ color: "white", paddingLeft: "25px" }}>
+          {user?.bio}
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex",paddingLeft: "25px", gap : "10px" }}>
-        <GetInfoFollow followerId={user?.id} followingId={user?.id}/>
+        <GetInfoFollow followerId={user.id} followingId={user.id}/>
       </Box>
     </> 
   );

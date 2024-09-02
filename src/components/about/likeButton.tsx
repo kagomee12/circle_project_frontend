@@ -15,7 +15,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({post_id}) => {
     const [count, setCount] = useState<number>(0)
     const onClick = async () => {
         const result = await like(post_id)
+        const countResult =await getThislike(post_id)
+        const resCount = countResult.get
         setLiked(result.liked)
+        setCount(resCount)
+
         }
     useEffect(() => {
         const fetchLikestatus = async () => {
@@ -26,7 +30,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({post_id}) => {
             setLiked(result.liked)
         };
         fetchLikestatus();
-    }, [isliked, post_id])
+    }, [ post_id])
 
     
 

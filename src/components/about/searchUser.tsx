@@ -1,33 +1,76 @@
-import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { TextField, Stack, Box, Typography } from "@mui/material";
+
 import { useEffect, useState } from "react";
 import images from "../../assets/images/pngwing.com.png";
-import { getAllUser } from "../../lib/api/call/user";
-import { IAllUser } from "../../Types/store";
+import { searchUser,getAllUser } from "../../lib/api/call/user";
 import useStore from "../../stores/hook";
-import FollowButton from "../about/followingButton";
+import FollowButton from "./followingButton";
 import { Link } from "react-router-dom";
 
-const AllUser = () => {
-  const [userother, setUserother] = useState<IAllUser[]>([]);
-  const { user } = useStore()
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllUser();
-        setUserother(data);
-        
-        
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [user]);
+export default function Search() {
+  const [users, setUsers] = useState<any>([]);
+  const {user} = useStore()
 
-  return (
-    <>
-      <Box
+  async function getUsers() {
+    try {
+      const x = await getAllUser();
+     
+      setUsers(x);
+      console.log(x);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getSearch(username: string) {
+    try {
+      const x = await searchUser(username);
+      console.log(x);
+      
+      setUsers(x);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  return (<>
+    <Stack direction="column" gap={3}>
+      <TextField
+        onChange={(e) => {
+          if (e.target.value !== "") getSearch(e.target.value);
+          else getUsers();
+        }}
+        label="search"
+        variant="filled"
+        sx={{
+          borderRadius: "10px",
+          mb: "15px",
+          border: "solid white 1px",
+          "& .MuiInputLabel-filled": { color: "gray" },
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "white",
+            },
+            "&:hover fieldset": {
+              borderColor: "white",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "white",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "white",
+          },
+        }}
+        size="small"
+        inputProps={{style:{color: "white"}}}
+      />
+        <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -36,9 +79,9 @@ const AllUser = () => {
           gap: "10px",
         }}
       >
-        {userother.map((items, index) => (
+        {users.map((items: any) => 
+        (
           <Box
-            key={index}
             sx={{
               flex: "1",
               display: items.username == user.username ? "none" : "flex",
@@ -66,7 +109,7 @@ const AllUser = () => {
                   display: "flex",
                 }}
               >
-                <Avatar
+                <img
                   src={images}
                   style={{ width: "70%", borderRadius: "100%" }}
                 />
@@ -96,9 +139,8 @@ const AllUser = () => {
           </Box>
         ))}
       </Box>
+      
+    </Stack>
     </>
   );
-};
-
-export default AllUser;
-
+}

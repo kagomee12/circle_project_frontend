@@ -1,18 +1,24 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
 import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
 import { getReply } from "../../lib/api/call/reply";
 import { like } from "../../lib/api/call/like";
+import DeleteIcon from '@mui/icons-material/Delete';
 import LikeButton from "./likeButton";
 import { Link, useParams } from "react-router-dom";
 import { GetReply } from "./countReply";
+import { Timeinfo } from "../common/durationTime";
+import useStore from "../../stores/hook";
+import { deletePost, getPosts } from "../../lib/api/call/post";
 
 const ReplyItem = () => {
   const [content, setContent] = useState<IContent[]>([]);
   const [count, setCount] = useState<Number>(0)
   const { id } = useParams();
+  const {user } = useStore()
+  const BaseURL = "http://localhost:3000/uploads/";
   const parent_id = parseInt(id || "0");
   useEffect(() => {
     const fetchData = async () => {
@@ -20,12 +26,22 @@ const ReplyItem = () => {
         const data = await getReply(parent_id);
         setContent(data.posts || []);
         setCount(data.get)
+
+        console.log("huh",data);
+        
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [content, count]);
+  }, [content, parent_id]);
+
+  const onclick = (post_id: number) => {
+    deletePost(post_id)
+
+    getPosts()
+  }
+
 
   return (
     <>
@@ -51,8 +67,8 @@ const ReplyItem = () => {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={images}
+              <Avatar
+                src={`${BaseURL}${item.author.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -77,10 +93,26 @@ const ReplyItem = () => {
                 <Typography sx={{ color: "grey", fontSize: "17px" }}>
                   @{item.author.username}
                 </Typography>
+                <Typography sx={{ color: "grey", fontSize: "17px" }}>
+                <Timeinfo time={new Date(item.createdAt)} />
+                </Typography>
               </Box>
               <Box>
                 <Typography sx={{ color: "grey" }}>{item.content}</Typography>
               </Box>
+              {item?.images && item.images.length > 0 && (
+            <ImageList sx={{ display: "flex" }}>
+              {item.images.map((image, index) => (
+                <ImageListItem key={index} sx={{ display: "flex", }}>
+                  <img
+                    src={`${BaseURL}${image.image}`}
+                    alt={`Post Image ${index + 1}`}
+                    style={{ width: "50%", height: "auto" }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          )}
               <Box sx={{ display: "flex", gap: "20px" }}>
                 <Typography sx={{
                         color: "grey",
@@ -103,6 +135,9 @@ const ReplyItem = () => {
                   <GetReply parent_id={item.id}/>
                 </Typography>
               </Box>
+            </Box>
+            <Box sx={user.username == item.author.username && user.fullName == item.author.fullName ? { display: "flex", marginLeft: "auto" } : { display: "none" }}>
+                  <Button onClick={() => onclick(item.id)}><DeleteIcon/></Button>
             </Box>
           </Box>
         ))}

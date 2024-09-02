@@ -19,7 +19,7 @@ export const GetInfoFollow:React.FC<IProps> = ({ followerId, followingId}) => {
 
             
         }; element()
-    }, [follower, following, setFollower, setFollowing, followerId, followingId])
+    }, [setFollower, setFollowing, followerId, followingId])
     return (
         <>
             <Typography variant="body2" color="white" >

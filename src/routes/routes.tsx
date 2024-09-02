@@ -8,6 +8,8 @@ import Session from '../Layout/session';
 import SessionLogin from '../Layout/SessionLogin';
 import Reply from '../pages/reply';
 import UserProfil from '../pages/userProfil';
+import Searching from '../pages/Search';
+import Media from '../components/about/DetailMedia';
 
 
 
@@ -25,7 +27,7 @@ const routes: RouteObject[] = [
             }
             ,{
                 path: "/Search",
-                element: <Search/>
+                element: <Searching/>
             },{
                 path: "/Follow",
                 element: <Follow/>
@@ -48,6 +50,9 @@ const routes: RouteObject[] = [
     },{
         path: "/Login",
         element: <SessionLogin/>
+    },{
+        path: "/media/:id",
+        element: <Media/>
     }
 ]
 export default routes;

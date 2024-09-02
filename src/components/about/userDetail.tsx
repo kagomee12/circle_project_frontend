@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { getUser} from "../../lib/api/call/user"
 import { IAllUser } from "../../Types/store";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import image from "../../assets/images/image.png";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
+import images from "../../assets/images/plain-default-lime-green-neon-solid-color-background-empty-space-anything-studio-room-display-ad-product-220898415.jpg";
 import { GetInfoFollow } from "../common/countingFollow";
 
 const DetailUser = () => {
     const [userOther, setUserOther] = useState<IAllUser>();
     const {username} = useParams()
     const userName = username
+    const BaseURL = "http://localhost:3000/uploads/"
 
     useEffect(
         ()=> {
@@ -37,7 +38,7 @@ const DetailUser = () => {
         }}
       >
         <img
-          src={images}
+          src={ userOther?.banner_pic ? `${BaseURL}${userOther?.banner_pic}` : images}
           style={{
             objectFit: "cover",
             width: "100%",
@@ -57,9 +58,9 @@ const DetailUser = () => {
           border: "solid rgb(33, 37, 41)",
         }}
       >
-        <img
-          src={image}
-          style={{ objectFit: "cover", width: "100%", borderRadius: "100%" }}
+        <Avatar
+          src={`${BaseURL}${userOther?.profil_pic}`}
+          style={{ objectFit: "cover",width: "100%", height: "100%", borderRadius: "100%" }}
         />
       </Box>
       <Box style={{ paddingLeft: "25px", marginTop: "-20px" }}>
@@ -73,6 +74,9 @@ const DetailUser = () => {
         }}
       >
         <p style={{ color: "white" }}>@{userOther?.username}</p>
+      </Box>
+      <Box>
+        <Typography style={{ paddingLeft: "25px", marginTop: "-10px", color: "white" }}>{userOther?.bio}</Typography>
       </Box>
       <Box sx={{ display: "flex",paddingLeft: "25px", gap : "10px" }}>
       <GetInfoFollow followerId={userOther? userOther.id : -1} followingId={userOther? userOther.id : -1}/>

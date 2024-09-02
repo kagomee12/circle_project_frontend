@@ -6,7 +6,11 @@ export interface IContent {
     author: IAllUser;
     comments: any[];
     parent_id?: number; 
-    images: string[];
+    images: [{
+      id: number
+      image: string
+      post_id: number
+    }];
     likes: any[];
  }
 
@@ -14,5 +18,6 @@ export interface IContent {
     username: string;
     email: string;
     fullName: string;
-    profile?: IProfile;
+    profil_pic: string;
  }
+

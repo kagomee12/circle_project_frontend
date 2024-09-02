@@ -7,7 +7,7 @@ import LikeButton from "./likeButton";
 import { useParams } from "react-router-dom";
 import { Timeinfo } from "../common/durationTime";
 
-const CommentItembyId = () => {
+const CommentItembymodal = () => {
   const [content, setContent] = useState<IContent>();
   const { id } = useParams();
   const parentId = id ? parseInt(id) : -1;
@@ -23,7 +23,7 @@ const CommentItembyId = () => {
       }
     };
     fetchData();
-  }, [parentId]);
+  }, []);
   return (
     <>
       <Box
@@ -77,22 +77,6 @@ const CommentItembyId = () => {
             <Box>
               <Typography sx={{ color: "grey" }}>{content?.content}</Typography>
             </Box>
-            {content?.images && content.images.length > 0 && (
-            <ImageList sx={{ display: "flex" }}>
-              {content.images.map((image, index) => (
-                //Dengan menambahkan satu lagi && di akhir, kita memastikan bahwa JSX 
-                //berikutnya (<ImageList> dan isinya)
-                //hanya dirender jika semua kondisi di kiri && bernilai true.
-                <ImageListItem key={index}>
-                  <img
-                    src={`${BaseURL}${image.image}`}
-                    alt={`Post Image ${index + 1}`}
-                    style={{ width: "50%", height: "auto" }}
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          )}
             <Box>
               <Typography>
                 <LikeButton post_id={content?.id ?? -1} />
@@ -105,4 +89,4 @@ const CommentItembyId = () => {
   );
 };
 
-export default CommentItembyId;
+export default CommentItembymodal;

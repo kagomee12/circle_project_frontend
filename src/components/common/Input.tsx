@@ -9,7 +9,7 @@ const CustomInput: React.FC<InputProps> = ({ ...rest }) => {
          {...rest}
          disableUnderline
          sx={{
-            width: "35vw",
+            width: "40vw",
             border: "1px solid gray",
             color: "white",
             borderRadius: "10px",

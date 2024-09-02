@@ -1,29 +1,32 @@
-import { Box, Typography } from "@mui/material";
-
+import { Avatar, Box, Typography } from "@mui/material";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
-import { getPostsbyUserId } from "../../lib/api/call/post";
+import { getPostsbyUserId, getPostsimagesbyId } from "../../lib/api/call/post";
 import CommentIcon from "@mui/icons-material/Comment";
 import { Link } from "react-router-dom";
 import LikeButton from "./likeButton";
 import { Timeinfo } from "../common/durationTime";
 import { GetReply } from "./countReply";
+import React from "react";
+
 
 
 interface IProps {
     user_id: number
 }
 
-const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
+export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
   const [content, setContent] = useState<IContent[]>([]);
+  const BaseURL = 'http://localhost:3000/uploads/';
   useEffect(() => {
     
     const fetchData = async () => {
       try {
         
         const data = await getPostsbyUserId(user_id);
-        console.log(data);
         
         setContent(data);
 
@@ -32,9 +35,9 @@ const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
       }
     };
     fetchData();
-  }, [content]);
+  }, []);
 
-  if (!content) {
+  if (content.length === 0) {
     return (
       <Box>
         no post yet
@@ -65,8 +68,8 @@ const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={images}
+              <Avatar
+                src={`${BaseURL}${item.author.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -98,6 +101,21 @@ const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
               <Box>
                 <Typography sx={{ color: "grey" }}>{item.content}</Typography>
               </Box>
+              <Box>
+              {item?.images && item.images.length > 0 && (
+            <ImageList sx={{ display: "flex" }}>
+              {item.images.map((image, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    src={`${BaseURL}${image.image}`}
+                    alt={`Post Image ${index + 1}`}
+                    style={{ width: "50%", height: "auto" }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          )}
+              </Box>
               <Box sx={{ display: "flex", gap: "20px" }}>
                 <Typography>
                   <LikeButton post_id={item.id} />
@@ -128,4 +146,99 @@ const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
     );
 };
 
-export default CommentItembyuserId
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const StandardImageList: React.FC<IProps> = ({user_id}) => {
+  const [content, setContent] = useState<IContent[]>([]);
+  const BaseURL = 'http://localhost:3000/uploads/';
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      try {
+        
+        const data = await getPostsimagesbyId(user_id);
+
+        
+        setContent(data);
+
+        
+        
+
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (content.length === 0) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", color: "white" }}>
+        no post yet
+      </Box>
+    );
+  }
+
+  return (
+    <>
+      <ImageList sx={{ width: "100%", height: 450 }} cols={3} rowHeight={164}>
+        {content.map((item, index) => (
+          <ImageListItem key={index}>
+            <Link to={`/media/${item.id}`} style={{ textDecoration: "none" }}>
+            <img
+              src={`${BaseURL}${item.images[0].image}`}
+              alt={`Post Image ${index + 1}`}
+              style={{ width: "100%", height: "auto" }}
+              loading="lazy"
+            />
+            </Link>
+         </ImageListItem>
+        ))}
+      </ImageList>
+    </>
+     
+  )
+}
+

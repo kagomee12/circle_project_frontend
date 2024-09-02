@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, TStore } from "../Types/store";
-import { setAuthToken } from "../lib/api";
-import { boolean } from "yup";
+import axios from "axios";
+
 
 
 interface StoreProps {
@@ -12,18 +12,17 @@ interface StoreProps {
 export const Store = createContext<TStore | null>(null);
 
 
+
 export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
+
    const [user, setUser] = useState<IUser>({
       email: "",
       fullName: "",
       username: "",
       id: 0,
    });
-
      // State untuk semua user
    const [isLogin, setIsLogin] = useState(false);
-
-   
 
    useEffect(() => {
       const token = localStorage.getItem("token");
@@ -31,21 +30,63 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
          setIsLogin(true);
       }
    }, []);
+   const [post, setPost] = useState([])
+  const getPosts = async () => {
+   try {
+      const res = await axios.get("http://localhost:3000/posts", {
+          headers: {
+            
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+      });
+      console.log(...res.data);
+      
+      setPost(res.data);
+  } catch (error) {
+      console.log(error);
+  }
+}
+const [following, setFollowing] = useState([])
 
-   useEffect(()=>{
-      const fullName = localStorage.getItem("fullName")
-      const username = localStorage.getItem("email")
-      const email = localStorage.getItem("usernamr")
-      const id = Number(localStorage.getItem("id"));
-
-      if (fullName && username && email && id) {
-         setUser({fullName, username, email, id})
+const getInfoFollowing = async (followingId: number) => {
+   try {
+       const response = await axios.get(`http://localhost:3000/follow/getfollowing/${followingId}`,{
+         headers: {
+             Authorization: `Bearer ${localStorage.getItem("token")}`,
+         }
       }
-   },[]
-   );
+       )
+       setFollowing(response.data)
+       console.log(response.data);
+       
+   } catch (error) {
+       console.log(error);
+       
+   }
+}
+
+
+ const [followers, setFollower] = useState([])
+
+ const getInfoFollower = async (followerId: number) => {
+    try {
+        const response = await axios.get(`http://localhost:3000/follow/getfollower/${followerId}`,{
+         headers: {
+             Authorization: `Bearer ${localStorage.getItem("token")}`,
+         }
+      }
+
+        )
+        setFollower(response.data)
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 
    const setUserState = (user: IUser) => {
-      
       setUser(user);
       setIsLogin(true);
    };
@@ -59,10 +100,6 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
       });
       setIsLogin(false);
       localStorage.removeItem("token");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("fullname");
-      localStorage.removeItem("id");
-      localStorage.removeItem("email");
    };
 
 
@@ -75,6 +112,13 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
             isLogin,
             setUserState,
             clearUser,
+            post,
+            getPosts,
+            getInfoFollower,
+            followers,
+            following,
+            getInfoFollowing
+            
          }}
       >
          {children}

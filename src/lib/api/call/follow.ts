@@ -59,3 +59,22 @@ export const countFollower = async (followerid: number) => {
     console.error(error);
     }
 }
+
+export const getInfoFollower = async (followerid: number) => {
+    try {
+        const response = await axios.get(`http://localhost:3000/follow/getfollower/${followerid}`)
+        return response
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+export const getInfoFollowing = async (followingid: number) => {
+    try {
+        const response = await axios.get(`http://localhost:3000/follow/getfollowing/${followingid}`)
+        return response
+    } catch (error) {
+        console.log(error);
+        
+    }
+}

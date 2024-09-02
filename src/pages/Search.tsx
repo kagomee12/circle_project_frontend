@@ -1,25 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Search from '../components/about/searchUser';
 
-function Search() {
-  const [inputValue, setInputValue] = useState("");
-  const previousInputValue = useRef("");
-
-  useEffect(() => {
-    previousInputValue.current = inputValue;
-  }, [inputValue]);
+function Searching() {
 
   return (
     <>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <h2 style={{color: "white"}}>Current Value: {inputValue}</h2>
-      <h2 style={{color: "white"}}>Previous Value: {previousInputValue.current}</h2>
+      <Search/>
     </>
   );
 
 }
 
-export default Search
+export default Searching

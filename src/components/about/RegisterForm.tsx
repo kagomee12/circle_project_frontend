@@ -5,6 +5,7 @@ import { IRegisterForm } from "../../Types/register";
 import { useRegisterFunction } from "../../stores/hooks/useRegisterFunction";
 import { useValidationRegister } from "../../stores/hooks/useValidationRegister";
 import { Controller } from "react-hook-form";
+import { toast } from "react-toastify";
 
 
 
@@ -14,9 +15,11 @@ const RegisterForm = () => {
    const onSubmit = async (data: IRegisterForm) => {
       await registerFunction.register(data);
       reset();
+      toast.success("Register Successful", { autoClose: 2000 });
       Navigate({ to: "/login" });
    };
    const onError = (errors: any) => {
+      toast.error("Register Failed", { autoClose: 2000 });
       console.log(errors);
    };
 
@@ -92,10 +95,12 @@ const RegisterForm = () => {
          />
          <Controller
             control={control}
+            
             name="password"
             render={({ field, fieldState }) => (
                <FormControl error={Boolean(fieldState.error)}>
                   <CustomInput
+                     type="password"
                      placeholder="password"
                      sx={{ mb: 2 }}
                      {...field}
@@ -108,7 +113,7 @@ const RegisterForm = () => {
                </FormControl>
             )}
          />
-         <Button type="submit" variant="contained" color="success" sx={{ borderRadius: 23 }}>
+         <Button type="submit" variant="contained" color="success" sx={{ borderRadius: 23, width: "113%" }}>
             Create
          </Button>
 

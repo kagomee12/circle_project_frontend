@@ -1,27 +1,30 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
 import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from "react";
-import { IContent } from "../../Types/content";
-import { getPosts } from "../../lib/api/call/post";
 import LikeButton from "./likeButton";
 import { Link } from "react-router-dom";
 import { GetReply } from "./countReply";
 import {Timeinfo} from "../common/durationTime";
+import useStore from "../../stores/hook";
+import { deletePost } from "../../lib/api/call/post";
 
 const CommentItem = () => {
-  const [content, setContent] = useState<IContent[]>([]);
+  const {getPosts,post, user} = useStore()
+  const BaseURL = 'http://localhost:3000/uploads/';
+  
+  
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getPosts();
-        setContent(data || []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [content]);
+    getPosts();
+  }, []);
+
+  const onclick = (post_id: number) => {
+    deletePost(post_id)
+
+    getPosts()
+  }
+
 
   return (
     <>
@@ -35,7 +38,8 @@ const CommentItem = () => {
           flexDirection: "column",
         }}
       >
-        {content?.map((item, index) => (
+        {post.map((item, index) => (
+          
           <Box
             key={index}
             sx={{
@@ -43,11 +47,12 @@ const CommentItem = () => {
               alignItems: "center",
               gap: "20px",
               borderTop: "1px solid grey",
+              width: "100%",
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={images}
+              <Avatar
+                src={`${BaseURL}${item.author?.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -75,9 +80,25 @@ const CommentItem = () => {
                 <Typography sx={{ color: "grey", fontSize: "17px" }}>
                 <Timeinfo time={new Date(item.createdAt)} />
                 </Typography>
+                
               </Box>
               <Box>
                 <Typography sx={{ color: "grey" }}>{item.content}</Typography>
+              </Box>
+              <Box>
+              {item?.images && item.images.length > 0 && (
+            <ImageList sx={{ display: "flex" }}>
+              {item.images.map((image, index) => (
+                <ImageListItem key={index} sx={{ display: "flex", }}>
+                  <img
+                    src={`${BaseURL}${image.image}`}
+                    alt={`Post Image ${index + 1}`}
+                    style={{ width: "50%", height: "auto" }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          )}
               </Box>
               <Box sx={{ display: "flex", gap: "20px" }}>
                 <Typography>
@@ -102,7 +123,11 @@ const CommentItem = () => {
                 </Typography>
               </Box>
             </Box>
+            <Box sx={user.username == item.author.username && user.fullName == item.author.fullName ? { display: "flex", marginLeft: "auto" } : { display: "none" }}>
+                  <Button onClick={() => onclick(item.id)}><DeleteIcon/></Button>
+            </Box>
           </Box>
+          
         ))}
       </Box>
     </>
@@ -110,3 +135,11 @@ const CommentItem = () => {
 };
 
 export default CommentItem;
+function setCommentsCount(arg0: (prevCount: any) => any) {
+  throw new Error("Function not implemented.");
+}
+
+function Posts() {
+  throw new Error("Function not implemented.");
+}
+
