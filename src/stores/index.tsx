@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, TStore } from "../Types/store";
-import axios from "axios";
+import { api } from "../lib/api";
 
 
 
@@ -33,7 +33,7 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
    const [post, setPost] = useState([])
   const getPosts = async () => {
    try {
-      const res = await axios.get("http://localhost:3000/posts", {
+      const res = await api.get("posts", {
           headers: {
             
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -50,14 +50,13 @@ const [following, setFollowing] = useState([])
 
 const getInfoFollowing = async (followingId: number) => {
    try {
-       const response = await axios.get(`http://localhost:3000/follow/getfollowing/${followingId}`,{
+       const response = await api.get(`follow/getfollowing/${followingId}`,{
          headers: {
              Authorization: `Bearer ${localStorage.getItem("token")}`,
          }
       }
        )
        setFollowing(response.data)
-       console.log(response.data);
        
    } catch (error) {
        console.log(error);
@@ -70,7 +69,7 @@ const getInfoFollowing = async (followingId: number) => {
 
  const getInfoFollower = async (followerId: number) => {
     try {
-        const response = await axios.get(`http://localhost:3000/follow/getfollower/${followerId}`,{
+        const response = await api.get(`follow/getfollower/${followerId}`,{
          headers: {
              Authorization: `Bearer ${localStorage.getItem("token")}`,
          }
@@ -78,7 +77,7 @@ const getInfoFollowing = async (followingId: number) => {
 
         )
         setFollower(response.data)
-        console.log(response.data);
+
     } catch (error) {
         console.log(error);
         
@@ -103,7 +102,6 @@ const getInfoFollowing = async (followingId: number) => {
    };
 
 
-   console.log(user, isLogin);
 
    return (
       <Store.Provider

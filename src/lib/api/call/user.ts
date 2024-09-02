@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { api } from ".."
 
 export const getAllUser = async () => {
     try {
-        const res= await axios.get(`http://localhost:3000/user`,{
+        const res= await api.get(`user`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
@@ -16,7 +16,7 @@ export const getAllUser = async () => {
 
 export const getUser = async (username: string) => {
     try {
-        const res= await axios.get(`http://localhost:3000/user/profile/${username}`,{
+        const res= await api.get(`user/profile/${username}`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
@@ -30,7 +30,7 @@ export const getUser = async (username: string) => {
 
 export const updateProfile = async (id: number,formData: any) => {
     try {
-        const res= await axios.patch(`http://localhost:3000/user/${id}`,formData,{
+        const res= await api.patch(`user/${id}`,formData,{
             headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -46,7 +46,7 @@ export const updateProfile = async (id: number,formData: any) => {
 
 export const searchUser = async (username: string) => {
     try {
-        const res= await axios.get(`http://localhost:3000/user/search/${username}`,{
+        const res= await api.get(`user/search/${username}`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
@@ -59,7 +59,7 @@ export const searchUser = async (username: string) => {
 }
 export const findUser = async (id: number) => {
     try {
-        const res= await axios.get(`http://localhost:3000/user/${id}`,{
+        const res= await api.get(`user/${id}`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }

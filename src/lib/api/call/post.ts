@@ -1,10 +1,11 @@
-import axios from "axios";
+
+import {api} from "../index"
 
 
 export const posting = async (formData: any) => {
     try {
         
-        const res= await axios.post("http://localhost:3000/posts", 
+        const res= await api.post("posts", 
            formData,
         {
             headers: {
@@ -24,7 +25,7 @@ export const posting = async (formData: any) => {
 
 export const getPosts = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/posts", {
+            const res = await api.get("posts", {
                 headers: {  
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -38,7 +39,7 @@ export const getPosts = async () => {
 
 export const getPostsbyId = async (id: number) => {
     try {
-        const res = await axios.get(`http://localhost:3000/posts/${id}`, {
+        const res = await api.get(`posts/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -50,7 +51,7 @@ export const getPostsbyId = async (id: number) => {
 }
 export const getPostsimagesbyId = async (user_id: number) => {
     try {
-        const res = await axios.get(`http://localhost:3000/posts/images/${user_id}`, {
+        const res = await api.get(`posts/images/${user_id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -62,7 +63,7 @@ export const getPostsimagesbyId = async (user_id: number) => {
 }
 export const getPostsbyUserId = async (id: number) => {
     try {
-        const res = await axios.get(`http://localhost:3000/posts/user/${id}`, {
+        const res = await api.get(`posts/user/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -75,7 +76,7 @@ export const getPostsbyUserId = async (id: number) => {
 
 export const deletePost = async (id: number) => {
     try {
-        const res = await axios.delete(`http://localhost:3000/posts/${id}`, {
+        const res = await api.delete(`posts/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

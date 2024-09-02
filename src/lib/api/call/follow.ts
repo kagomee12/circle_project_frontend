@@ -1,9 +1,10 @@
-import axios from 'axios';
+
+import { api } from "..";
 
 
 export const Follow = async (user_id: number) => {
         try {
-        const response = await axios.post(`http://localhost:3000/follow/${user_id}`
+        const response = await api.post(`follow/${user_id}`
             , {},{ 
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -19,7 +20,7 @@ export const Follow = async (user_id: number) => {
 
 export const getFollowing = async (followingid: number) => {
     try {
-    const response = await axios.get(`http://localhost:3000/follow/${followingid}`
+    const response = await api.get(`follow/${followingid}`
         , { 
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -33,7 +34,7 @@ export const getFollowing = async (followingid: number) => {
 }
 export const countFollowing = async (followingid: number) => {
     try {
-    const response = await axios.get(`http://localhost:3000/follow/countfollowing/${followingid}`
+    const response = await api.get(`follow/countfollowing/${followingid}`
         , { 
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +48,7 @@ export const countFollowing = async (followingid: number) => {
 }
 export const countFollower = async (followerid: number) => {
     try {
-    const response = await axios.get(`http://localhost:3000/follow/countfollower/${followerid}`
+    const response = await api.get(`follow/countfollower/${followerid}`
         , { 
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -62,7 +63,7 @@ export const countFollower = async (followerid: number) => {
 
 export const getInfoFollower = async (followerid: number) => {
     try {
-        const response = await axios.get(`http://localhost:3000/follow/getfollower/${followerid}`)
+        const response = await api.get(`follow/getfollower/${followerid}`)
         return response
     } catch (error) {
         console.log(error);
@@ -71,7 +72,7 @@ export const getInfoFollower = async (followerid: number) => {
 }
 export const getInfoFollowing = async (followingid: number) => {
     try {
-        const response = await axios.get(`http://localhost:3000/follow/getfollowing/${followingid}`)
+        const response = await api.get(`follow/getfollowing/${followingid}`)
         return response
     } catch (error) {
         console.log(error);

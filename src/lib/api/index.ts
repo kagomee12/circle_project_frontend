@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-   baseURL: import.meta.env.VITE_BASE_URL || "http://localhost:3000"
+   baseURL: import.meta.env.VITE_BASE_URL || "https://circle-project-back-9fin-fooocrono-kiagus-alfitrahs-projects.vercel.app/"
 });
 
 export const setAuthToken = (token?: string) => {

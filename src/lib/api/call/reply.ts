@@ -1,8 +1,8 @@
-import axios from "axios";
+import { api } from "..";
 
 export const reply = async (post_id: number,formData: any) => {
     try {
-        const res= await axios.post(`http://localhost:3000/reply/${post_id}`, 
+        const res= await api.post(`reply/${post_id}`, 
             formData
         ,{
             headers: {
@@ -21,7 +21,7 @@ export const reply = async (post_id: number,formData: any) => {
 
 export const getReply = async (id: number) => {
     try {
-        const res= await axios.get(`http://localhost:3000/reply/${id}`, {
+        const res= await api.get(`reply/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
@@ -38,7 +38,7 @@ export const getReply = async (id: number) => {
 
 export const countReply = async (id: number) => {
     try {
-        const res= await axios.get(`http://localhost:3000/reply/count/${id}`, {
+        const res= await api.get(`reply/count/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
