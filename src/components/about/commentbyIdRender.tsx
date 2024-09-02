@@ -10,7 +10,7 @@ const CommentItembyId = () => {
   const [content, setContent] = useState<IContent>();
   const { id } = useParams();
   const parentId = id ? parseInt(id) : -1;
-  const BaseURL = "http://localhost:3000/uploads/";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,8 +46,8 @@ const CommentItembyId = () => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Avatar
-              src={`${BaseURL}${content?.author.profil_pic}`}
-              alt=""
+              src={`${content?.author.profil_pic}`}
+              alt="profile picture"
               style={{
                 objectFit: "cover",
                 width: "50px",
@@ -84,7 +84,7 @@ const CommentItembyId = () => {
                 //hanya dirender jika semua kondisi di kiri && bernilai true.
                 <ImageListItem key={index}>
                   <img
-                    src={`${BaseURL}${image.image}`}
+                    src={`${image.image}`}
                     alt={`Post Image ${index + 1}`}
                     style={{ width: "50%", height: "auto" }}
                   />

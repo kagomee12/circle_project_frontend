@@ -12,7 +12,6 @@ const Commentsinput = () => {
   const {getPosts, user} = useStore();
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<any>(null);
-  const BaseURL = "http://localhost:3000/uploads/";
   const handleFileChange = (event: any) => {
     if (event.target.files) {
       setImage(event.target.files);
@@ -81,7 +80,7 @@ const Commentsinput = () => {
             }}
           >
             <Avatar
-              src={`${BaseURL}${user.profile?.profil_pic}`}
+              src={`${user.profile?.profil_pic}`}
               style={{ width: "50px", height: "50px", borderRadius: "100%" }}
               alt="profile"
             />

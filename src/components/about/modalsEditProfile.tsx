@@ -25,7 +25,7 @@ export default function ModalEditProfile() {
     height: "max-content",
     p: 4,
   };
-  const BaseURL = "http://localhost:3000/uploads/";
+ 
   const { user, setUserState,getPosts } = useStore();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -130,7 +130,7 @@ export default function ModalEditProfile() {
                 style={{
                   width: "100%",
                   height: "75px",
-                  backgroundImage: `url(${BaseURL}${user.profile?.banner_pic})`,
+                  backgroundImage: `url(${user.profile?.banner_pic})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -166,7 +166,7 @@ export default function ModalEditProfile() {
                     marginTop: "-30px",
                     marginLeft: "20px",
                     border: "solid rgb(33, 37, 41)",
-                    backgroundImage: `url(${BaseURL}${user.profile?.profil_pic})`,
+                    backgroundImage: `url(${user.profile?.profil_pic})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

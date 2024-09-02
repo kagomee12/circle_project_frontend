@@ -12,7 +12,7 @@ const Media = () => {
   const [content, setContent] = useState<IContent>();
   const { id } = useParams();
   const post_id = parseInt(id || "-1");
-  const BaseURL = "http://localhost:3000/uploads/";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,7 +30,7 @@ const Media = () => {
     <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Box sx= {{ flex: 1 ,overflow: "auto"}}>
             {content && content.images.length > 0 && (
-              <img src={`${BaseURL}${content.images[0].image}`} alt="Content Image" style={{ width:"100%" }} />
+              <img src={`${content.images[0].image}`} alt="Content Image" style={{ width:"100%" }} />
             )}
           </Box>
           <Box sx={{ flex: 1, overflow: "auto"}}>

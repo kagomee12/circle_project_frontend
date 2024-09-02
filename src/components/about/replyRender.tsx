@@ -18,7 +18,6 @@ const ReplyItem = () => {
   const [count, setCount] = useState<Number>(0)
   const { id } = useParams();
   const {user } = useStore()
-  const BaseURL = "http://localhost:3000/uploads/";
   const parent_id = parseInt(id || "0");
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +66,7 @@ const ReplyItem = () => {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
-                src={`${BaseURL}${item.author.profil_pic}`}
+                src={`${item.author.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -104,7 +103,7 @@ const ReplyItem = () => {
               {item.images.map((image, index) => (
                 <ImageListItem key={index} sx={{ display: "flex", }}>
                   <img
-                    src={`${BaseURL}${image.image}`}
+                    src={`${image.image}`}
                     alt={`Post Image ${index + 1}`}
                     style={{ width: "50%", height: "auto" }}
                   />

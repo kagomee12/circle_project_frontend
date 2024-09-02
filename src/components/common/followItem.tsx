@@ -5,7 +5,6 @@ import images from "../../assets/images/pngwing.com.png";
 
 export const FollowersItem = () => {
   const { user, getInfoFollower, followers } = useStore();
-  const BaseURL = "http://localhost:3000/uploads/";
 
   useEffect(() => {
     getInfoFollower(user.id);
@@ -56,7 +55,7 @@ export const FollowersItem = () => {
                 <Avatar
                   src={
                     items?.followers?.profil_pic
-                      ? `${BaseURL}${items.followers?.profil_pic}`
+                      ? `${items.followers?.profil_pic}`
                       : images
                   }
                   style={{ width: "100%", borderRadius: "100%" }}
@@ -95,7 +94,6 @@ export const FollowersItem = () => {
 };
 export const FollowingItem = () => {
   const { user, getInfoFollowing, following } = useStore();
-  const BaseURL = "http://localhost:3000/uploads/";
 
   useEffect(() => {
     getInfoFollowing(user.id);
@@ -146,7 +144,7 @@ export const FollowingItem = () => {
                 <Avatar
                   src={
                     items?.following?.profil_pic
-                      ? `${BaseURL}${items.following?.profil_pic}`
+                      ? `${items.following?.profil_pic}`
                       : images
                   }
                   style={{ width: "100%", objectFit: "cover" }}

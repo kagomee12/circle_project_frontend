@@ -10,7 +10,6 @@ const DetailUser = () => {
     const [userOther, setUserOther] = useState<IAllUser>();
     const {username} = useParams()
     const userName = username
-    const BaseURL = "http://localhost:3000/uploads/"
 
     useEffect(
         ()=> {
@@ -37,7 +36,7 @@ const DetailUser = () => {
         }}
       >
         <img
-          src={ userOther?.banner_pic ? `${BaseURL}${userOther?.banner_pic}` : images}
+          src={ userOther?.banner_pic ? `${userOther?.banner_pic}` : images}
           style={{
             objectFit: "cover",
             width: "100%",
@@ -58,7 +57,7 @@ const DetailUser = () => {
         }}
       >
         <Avatar
-          src={`${BaseURL}${userOther?.profil_pic}`}
+          src={`${userOther?.profil_pic}`}
           style={{ objectFit: "cover",width: "100%", height: "100%", borderRadius: "100%" }}
         />
       </Box>

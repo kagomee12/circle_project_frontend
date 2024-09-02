@@ -11,7 +11,6 @@ import { deletePost } from "../../lib/api/call/post";
 
 const CommentItem = () => {
   const {getPosts,post, user} = useStore()
-  const BaseURL = 'http://localhost:3000/uploads/';
   
   
   useEffect(() => {
@@ -51,7 +50,7 @@ const CommentItem = () => {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
-                src={`${BaseURL}${item.author?.profil_pic}`}
+                src={`${item.author?.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -90,7 +89,7 @@ const CommentItem = () => {
               {item.images.map((image, index) => (
                 <ImageListItem key={index} sx={{ display: "flex", }}>
                   <img
-                    src={`${BaseURL}${image.image}`}
+                    src={`${image.image}`}
                     alt={`Post Image ${index + 1}`}
                     style={{ width: "50%", height: "auto" }}
                   />

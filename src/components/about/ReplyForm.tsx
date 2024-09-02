@@ -18,7 +18,6 @@ const Replyinput = () => {
   //Karena id bisa undefined, perlu dicek sebelum diproses oleh parseInt().
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<any>(null);
-  const BaseURL = "http://localhost:3000/uploads/";
 
   const { user } = useStore();
   const handleFileChange = (event: any) => {
@@ -86,7 +85,7 @@ const Replyinput = () => {
             }}
           >
             <Avatar
-              src={`${BaseURL}${user.profile?.profil_pic}`}
+              src={`${user.profile?.profil_pic}`}
               style={{ width: "50px", height: "50px", borderRadius: "100%" }}
               alt="profile"
             />

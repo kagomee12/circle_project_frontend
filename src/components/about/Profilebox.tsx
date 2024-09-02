@@ -9,7 +9,6 @@ import ModalEditProfile from "./modalsEditProfile";
 
 const Profilebox = () => {
   const { user } = useStore();
-  const BaseURL = "http://localhost:3000/uploads/";
 
   return (
     <>
@@ -26,7 +25,7 @@ const Profilebox = () => {
         }}
       >
         <img
-          src={user.profile?.banner_pic ? `${BaseURL}${user.profile?.banner_pic}`: images}
+          src={user.profile?.banner_pic ? `${user.profile?.banner_pic}`: images}
           style={{
             objectFit: "cover",
             width: "100%",
@@ -49,7 +48,7 @@ const Profilebox = () => {
         }}
       >
         <Avatar
-          src={`${BaseURL}${user.profile?.profil_pic}`}
+          src={`${user.profile?.profil_pic}`}
           style={{ objectFit: "cover", width: "100%",height: "100%", borderRadius: "100%" }}
         />
       </Box>

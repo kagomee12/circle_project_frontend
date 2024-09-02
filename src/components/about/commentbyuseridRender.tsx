@@ -19,7 +19,6 @@ interface IProps {
 
 export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
   const [content, setContent] = useState<IContent[]>([]);
-  const BaseURL = 'http://localhost:3000/uploads/';
   useEffect(() => {
     
     const fetchData = async () => {
@@ -68,7 +67,7 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
-                src={`${BaseURL}${item.author.profil_pic}`}
+                src={`${item.author.profil_pic}`}
                 alt=""
                 style={{
                   objectFit: "cover",
@@ -106,7 +105,7 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
               {item.images.map((image, index) => (
                 <ImageListItem key={index}>
                   <img
-                    src={`${BaseURL}${image.image}`}
+                    src={`${image.image}`}
                     alt={`Post Image ${index + 1}`}
                     style={{ width: "50%", height: "auto" }}
                   />
@@ -189,7 +188,6 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
 
 export const StandardImageList: React.FC<IProps> = ({user_id}) => {
   const [content, setContent] = useState<IContent[]>([]);
-  const BaseURL = 'http://localhost:3000/uploads/';
   useEffect(() => {
     
     const fetchData = async () => {
@@ -226,7 +224,7 @@ export const StandardImageList: React.FC<IProps> = ({user_id}) => {
           <ImageListItem key={index}>
             <Link to={`/media/${item.id}`} style={{ textDecoration: "none" }}>
             <img
-              src={`${BaseURL}${item.images[0].image}`}
+              src={`${item.images[0].image}`}
               alt={`Post Image ${index + 1}`}
               style={{ width: "100%", height: "auto" }}
               loading="lazy"

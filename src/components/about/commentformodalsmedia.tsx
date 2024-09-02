@@ -10,7 +10,6 @@ const CommentItembymodal = () => {
   const [content, setContent] = useState<IContent>();
   const { id } = useParams();
   const parentId = id ? parseInt(id) : -1;
-  const BaseURL = "http://localhost:3000/uploads/";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,7 +45,7 @@ const CommentItembymodal = () => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Avatar
-              src={`${BaseURL}${content?.author.profil_pic}`}
+              src={`${content?.author.profil_pic}`}
               alt=""
               style={{
                 objectFit: "cover",
