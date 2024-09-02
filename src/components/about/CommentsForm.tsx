@@ -23,11 +23,12 @@ const Commentsinput = () => {
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
-    console.log('cek');
     
-
     const formData = new FormData();
     formData.append("content", content);
+
+    console.log(content);
+    
 
     if (image) {
       for (let i = 0; i < image.length; i++) {
