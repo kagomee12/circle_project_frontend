@@ -29,7 +29,7 @@ const Commentsinput = () => {
 
     if (image) {
       for (let i = 0; i < image.length; i++) {
-        formData.append("files", image[i]);
+        formData.append("image", image[i]);
       }
     }
 
