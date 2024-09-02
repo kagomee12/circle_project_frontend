@@ -1,8 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import image from "../../assets/images/image.png";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
 import Modal from "@mui/material/Modal";
 import { findUser, updateProfile } from "../../lib/api/call/user";
 import useStore from "../../stores/hook";

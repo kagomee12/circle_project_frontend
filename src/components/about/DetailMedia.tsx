@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import Replyinput from "./ReplyForm";
 
 import ReplyItem from "./replyRender";
-import useStore from "../../stores/hook";
 import CommentItembymodal from "./commentformodalsmedia";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

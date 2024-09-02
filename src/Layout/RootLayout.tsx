@@ -5,7 +5,7 @@ import Sidebar from "../components/about/Navbar"
 import useStore from "../stores/hook"
 
 const RootLayout = () => {
-    const { isLogin,user } = useStore()
+    const { isLogin } = useStore()
     const { pathname } = useLocation()
     
     if(!isLogin){

@@ -1,5 +1,4 @@
-import { Avatar, Box, ImageList, ImageListItem, Typography } from "@mui/material";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
+import { Avatar, Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
 import { getPostsbyId } from "../../lib/api/call/post";

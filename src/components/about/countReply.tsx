@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { countReply } from "../../lib/api/call/reply";
-import { Typography } from "@mui/material";
 
 interface replyProps {
     parent_id: number

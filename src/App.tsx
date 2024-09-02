@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";
-import Darktheme from "./components/common/Darkmode";
-import { StoreProvider } from "./stores";
+
+
 import * as authAsync from "./lib/api/call/auth";
 import useStore from "./stores/hook";
 import { useEffect } from "react";
@@ -37,9 +37,9 @@ function App() {
   }, []);
 
   return (
-    <Darktheme>
+   
       <RouterProvider router={createBrowserRouter(routes)} />
-    </Darktheme>
+   
   );
 }
 

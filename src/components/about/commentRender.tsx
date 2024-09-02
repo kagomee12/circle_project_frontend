@@ -1,8 +1,7 @@
 import { Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import LikeButton from "./likeButton";
 import { Link } from "react-router-dom";
 import { GetReply } from "./countReply";
@@ -135,11 +134,5 @@ const CommentItem = () => {
 };
 
 export default CommentItem;
-function setCommentsCount(arg0: (prevCount: any) => any) {
-  throw new Error("Function not implemented.");
-}
 
-function Posts() {
-  throw new Error("Function not implemented.");
-}
 

@@ -1,5 +1,4 @@
-import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Avatar, Box,  Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import images from "../../assets/images/pngwing.com.png";
 import { getAllUser } from "../../lib/api/call/user";

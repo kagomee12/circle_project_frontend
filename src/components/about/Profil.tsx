@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 import useStore from "../../stores/hook";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Profilebox from "./Profilebox";
 import AllUser from "../Suggested/SuggestedData";
@@ -11,7 +11,7 @@ function Profil() {
   const { user } = useStore();
   console.log("ceking", user);
   
-  const { pathname } = useLocation();
+
   const { username } = useParams();
 
 

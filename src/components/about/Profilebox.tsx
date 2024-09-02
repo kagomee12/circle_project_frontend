@@ -1,7 +1,7 @@
 
 import images from "../../assets/images/plain-default-lime-green-neon-solid-color-background-empty-space-anything-studio-room-display-ad-product-220898415.jpg";
 import useStore from "../../stores/hook";
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { GetInfoFollow } from "../common/countingFollow";
 import ModalEditProfile from "./modalsEditProfile";
 

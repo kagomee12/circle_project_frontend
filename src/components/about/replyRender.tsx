@@ -1,10 +1,10 @@
 import { Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
+
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
 import { getReply } from "../../lib/api/call/reply";
-import { like } from "../../lib/api/call/like";
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import LikeButton from "./likeButton";
 import { Link, useParams } from "react-router-dom";
@@ -27,14 +27,13 @@ const ReplyItem = () => {
         setContent(data.posts || []);
         setCount(data.get)
 
-        console.log("huh",data);
         
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [content, parent_id]);
+  }, [content, parent_id, count]);
 
   const onclick = (post_id: number) => {
     deletePost(post_id)

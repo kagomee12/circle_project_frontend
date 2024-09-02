@@ -1,5 +1,4 @@
-import { Avatar, Box, Button, IconButton } from "@mui/material";
-import hutao from "../../assets/images/hutao_pasphoto.jpeg";
+import { Avatar, Box, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
 import { posting } from "../../lib/api/call/post";

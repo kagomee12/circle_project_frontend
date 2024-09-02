@@ -3,7 +3,7 @@ import * as authAsync from "../../lib/api/call/auth";
 import useStore from "../../stores/hook";
 
 export const useLoginFunction = () => {
-  const { setUserState, user } = useStore();
+  const { setUserState } = useStore();
 
   const login = async (email: string, password: string) => {
     try {

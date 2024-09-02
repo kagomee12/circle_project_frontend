@@ -1,7 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 import RootLayout from '../Layout/RootLayout';
 import Home from '../pages/Home';
-import Search from '../pages/Search';
 import FullProfil from '../pages/FullProfil';
 import Follow from '../pages/Follow';
 import Session from '../Layout/session';

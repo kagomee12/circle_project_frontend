@@ -3,7 +3,6 @@ import { getUser} from "../../lib/api/call/user"
 import { IAllUser } from "../../Types/store";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Typography } from "@mui/material";
-import image from "../../assets/images/image.png";
 import images from "../../assets/images/plain-default-lime-green-neon-solid-color-background-empty-space-anything-studio-room-display-ad-product-220898415.jpg";
 import { GetInfoFollow } from "../common/countingFollow";
 

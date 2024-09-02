@@ -1,6 +1,5 @@
 import { Avatar, Box, Button } from "@mui/material";
 
-import hutao from "../../assets/images/hutao_pasphoto.jpeg";
 
 import SendIcon from "@mui/icons-material/Send";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";

@@ -1,7 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import images from "../../assets/images/a3ead9bdd8650aeb12505ec58cee3c99.jpg";
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
 import { getPostsbyUserId, getPostsimagesbyId } from "../../lib/api/call/post";
@@ -191,7 +190,6 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
 export const StandardImageList: React.FC<IProps> = ({user_id}) => {
   const [content, setContent] = useState<IContent[]>([]);
   const BaseURL = 'http://localhost:3000/uploads/';
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
   useEffect(() => {
     
     const fetchData = async () => {
