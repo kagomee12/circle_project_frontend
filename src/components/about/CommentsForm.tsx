@@ -27,8 +27,6 @@ const Commentsinput = () => {
     const formData = new FormData();
     formData.append("content", content);
 
-    console.log(content);
-    
 
     if (image) {
       for (let i = 0; i < image.length; i++) {
@@ -38,7 +36,7 @@ const Commentsinput = () => {
 
     await posting(formData);
     
-    getPosts()
+   await getPosts()
     toast.success("post Added", { autoClose: 2000 });
   };
 
