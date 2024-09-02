@@ -63,15 +63,15 @@ export default function ModalEditProfile() {
     formData.append("fullName", fullName);
 
     if (profil_pic) {
-      formData.append("profil_pic", profil_pic);
+      formData.append("file", profil_pic);
     } else if (user.profile?.profil_pic) {
-      formData.append("profil_pic", user.profile?.profil_pic);
+      formData.append("file", user.profile?.profil_pic);
     }
 
     if (banner_pic) {
-      formData.append("banner_pic", banner_pic);
+      formData.append("file", banner_pic);
     } else if (user.profile?.banner_pic) {
-      formData.append("banner_pic", user.profile?.banner_pic);
+      formData.append("file", user.profile?.banner_pic);
     }
 
     formData.append("bio", bio);
