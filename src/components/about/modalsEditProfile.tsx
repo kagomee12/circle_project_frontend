@@ -50,29 +50,29 @@ export default function ModalEditProfile() {
       setProfil_pic(event.target.files[0]);
     }
   };
-  const handlebannerChange = (event: any) => {
-    if (event.target.files && event.target.files[0]) {
-      setBanner_pic(event.target.files[0]);
-    }
-  };
+  // const handlebannerChange = (event: any) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     setBanner_pic(event.target.files[0]);
+  //   }
+  // };
   const onSubmit = async (event: any) => {
     event.preventDefault();
 
     const formData = new FormData();
+
+    
     formData.append("username", username);
     formData.append("fullName", fullName);
 
     if (profil_pic) {
-      formData.append("profil_pic", profil_pic);
-    } else if (user.profile?.profil_pic) {
-      formData.append("profil_pic", user.profile?.profil_pic);
+      formData.append("file", profil_pic);
     }
 
-    if (banner_pic) {
-      formData.append("banner_pic", banner_pic);
-    } else if (user.profile?.banner_pic) {
-      formData.append("banner_pic", user.profile?.banner_pic);
-    }
+    // if (banner_pic) {
+    //   formData.append("banner_pic", banner_pic);
+    // } else if (user.profile?.banner_pic) {
+    //   formData.append("banner_pic", user.profile?.banner_pic);
+    // }
 
     formData.append("bio", bio);
 
@@ -143,7 +143,7 @@ export default function ModalEditProfile() {
                   type="file"
                   name="banner_pic"
                   multiple
-                  onChange={handlebannerChange}
+                  // onChange={handlebannerChange}
                   id="banner_pic"
                   style={{ display: "none" }}
                 />

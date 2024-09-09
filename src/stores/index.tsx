@@ -39,7 +39,6 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
       });
-      console.log(...res.data);
       
       setPost(res.data);
   } catch (error) {

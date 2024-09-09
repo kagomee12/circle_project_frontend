@@ -32,8 +32,8 @@ export const updateProfile = async (id: number,formData: any) => {
     try {
         const res= await api.patch(`user/${id}`,formData,{
             headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'multipart/form-data'
+                
             }
         }   
     )
