@@ -34,7 +34,7 @@ export default function ModalEditProfile() {
   const [fullName, setfullName] = React.useState(user.fullName || "");
   const [bio, setBio] = React.useState(user.bio || "");
   const [profil_pic, setProfil_pic] = React.useState<any>(null);
-  const [banner_pic, setBanner_pic] = React.useState<any>(null);
+  // const [banner_pic, setBanner_pic] = React.useState<any>(null);
 
   const handleusernametChange = (event: any) => {
     setuserName(event.target.value);
