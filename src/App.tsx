@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";
-
-
 import * as authAsync from "./lib/api/call/auth";
 import useStore from "./stores/hook";
 import { useEffect } from "react";

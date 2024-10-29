@@ -82,8 +82,6 @@ export default function ModalEditProfile() {
 
    const data = await findUser(user.id);
 
-   
-
    setUserState({
     id: user.id,
     username: data.username,
