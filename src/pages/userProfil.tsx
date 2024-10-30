@@ -1,4 +1,3 @@
-
 import { Box } from "@mui/material";
 import PostProfile from "../components/about/postProfile";
 import DetailUser from "../components/about/userDetail";
@@ -9,19 +8,18 @@ import { IAllUser } from "../Types/store";
 
 function UserProfil() {
   const [userOther, setUserOther] = useState<IAllUser>();
-    const {username} = useParams()
-    const userName = username
+  const { username } = useParams();
+  const userName = username;
 
-    useEffect(
-        ()=> {
-            const fetchUser = async()=> {
-                const detailUser = await getUser(userName? userName : "notfound")
-                setUserOther(detailUser)
-
-            };
-            fetchUser()
-        },[username]
-    )
+  useEffect(() => {
+    const fetchUser = async () => {
+      const detailUser = await getUser(userName ? userName : "notfound");
+      setUserOther(detailUser.data);
+      console.log(detailUser.data);
+      
+    };
+    fetchUser();
+  }, [username]);
   return (
     <>
       <Box
@@ -38,7 +36,7 @@ function UserProfil() {
         <DetailUser />
       </Box>
       <Box>
-        <PostProfile user_id={userOther? userOther.id : -1}/>
+        <PostProfile user_id={userOther ? userOther.id : -1} />
       </Box>
     </>
   );

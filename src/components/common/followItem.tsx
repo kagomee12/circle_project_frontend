@@ -117,8 +117,12 @@ export const FollowingItem = () => {
               flex: "1",
               color: "white",
               flexDirection: "coloumn",
-              width: "100%",
+              width: "90%",
               display: "flex",
+              backgroundColor: "#262626",
+              padding: "10px",
+              borderRadius: "10px",
+              margin: "auto"
             }}
           >
             <Box

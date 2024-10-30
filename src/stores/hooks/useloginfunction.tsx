@@ -8,9 +8,9 @@ export const useLoginFunction = () => {
   const login = async (email: string, password: string) => {
     try {
       const resToken = await authAsync.login(email, password);
-      const profile = await authAsync.checkAuth(resToken);
-      setAuthToken(resToken);
-      localStorage.setItem("token", resToken);
+      const profile = await authAsync.checkAuth(resToken.data);
+      setAuthToken(resToken.data);
+      localStorage.setItem("token", resToken.data);
 
       setUserState({
         username: profile.username,

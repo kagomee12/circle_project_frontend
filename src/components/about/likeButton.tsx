@@ -10,23 +10,22 @@ interface LikeButtonProps {
 
 
 const LikeButton: React.FC<LikeButtonProps> = ({post_id}) => {
-
     const [isliked, setLiked] = useState<Boolean>()
     const [count, setCount] = useState<number>(0)
     const onClick = async () => {
         const result = await like(post_id)
         const countResult =await getThislike(post_id)
-        const resCount = countResult.get
+        
         setLiked(result.liked)
-        setCount(resCount)
+        setCount(countResult.total_likes)
 
         }
     useEffect(() => {
         const fetchLikestatus = async () => {
             const result = await getLike(post_id)
+            
             const countResult =await getThislike(post_id)
-            const resCount = countResult.get
-            setCount(resCount)
+            setCount(countResult.total_likes)
             setLiked(result.liked)
         };
         fetchLikestatus();

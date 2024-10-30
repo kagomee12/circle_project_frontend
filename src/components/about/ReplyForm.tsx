@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 const Replyinput = () => {
   const { id } = useParams();
   const parentId = id ? parseInt(id) : -1;
-  //Karena id bisa undefined, perlu dicek sebelum diproses oleh parseInt().
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<any>(null);
 

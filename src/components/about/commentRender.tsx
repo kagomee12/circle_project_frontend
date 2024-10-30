@@ -1,28 +1,32 @@
-import { Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  ImageList,
+  ImageListItem,
+  Typography,
+} from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useEffect} from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useEffect } from "react";
 import LikeButton from "./likeButton";
 import { Link } from "react-router-dom";
 import { GetReply } from "./countReply";
-import {Timeinfo} from "../common/durationTime";
+import { Timeinfo } from "../common/durationTime";
 import useStore from "../../stores/hook";
 import { deletePost } from "../../lib/api/call/post";
 
 const CommentItem = () => {
-  const {getPosts,post, user} = useStore()
-  
-  
+  const { getPosts, post, user } = useStore();
+
   useEffect(() => {
     getPosts();
   }, []);
 
   const onclick = (post_id: number) => {
-    deletePost(post_id)
-
-    getPosts()
-  }
-
+    deletePost(post_id);
+    getPosts();
+  };
 
   return (
     <>
@@ -36,8 +40,7 @@ const CommentItem = () => {
           flexDirection: "column",
         }}
       >
-        {post.map((item, index) => (
-          
+        {post?.map((item, index) => (
           <Box
             key={index}
             sx={{
@@ -76,27 +79,26 @@ const CommentItem = () => {
                   @{item.author.username}
                 </Typography>
                 <Typography sx={{ color: "grey", fontSize: "17px" }}>
-                <Timeinfo time={new Date(item.createdAt)} />
+                  <Timeinfo time={new Date(item.createdAt)} />
                 </Typography>
-                
               </Box>
               <Box>
                 <Typography sx={{ color: "grey" }}>{item.content}</Typography>
               </Box>
               <Box>
-              {item?.images && item.images.length > 0 && (
-            <ImageList sx={{ display: "flex" }}>
-              {item.images.map((image, index) => (
-                <ImageListItem key={index} sx={{ display: "flex", }}>
-                  <img
-                    src={`${image.image}`}
-                    alt={`Post Image ${index + 1}`}
-                    style={{ width: "50%", height: "auto" }}
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          )}
+                {item?.images && item.images.length > 0 && (
+                  <ImageList sx={{ display: "flex" }}>
+                    {item.images.map((image, index) => (
+                      <ImageListItem key={index} sx={{ display: "flex" }}>
+                        <img
+                          src={`${image.image}`}
+                          alt={`Post Image ${index + 1}`}
+                          style={{ width: "50%", height: "auto" }}
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                )}
               </Box>
               <Box sx={{ display: "flex", gap: "20px" }}>
                 <Typography>
@@ -121,11 +123,19 @@ const CommentItem = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box sx={user.username == item.author.username && user.fullName == item.author.fullName ? { display: "flex", marginLeft: "auto" } : { display: "none" }}>
-                  <Button onClick={() => onclick(item.id)}><DeleteIcon/></Button>
+            <Box
+              sx={
+                user.username == item.author.username &&
+                user.fullName == item.author.fullName
+                  ? { display: "flex", marginLeft: "auto" }
+                  : { display: "none" }
+              }
+            >
+              <Button onClick={() => onclick(item.id)}>
+                <DeleteIcon />
+              </Button>
             </Box>
           </Box>
-          
         ))}
       </Box>
     </>
@@ -133,5 +143,3 @@ const CommentItem = () => {
 };
 
 export default CommentItem;
-
-

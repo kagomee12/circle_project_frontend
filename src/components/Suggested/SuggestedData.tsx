@@ -14,9 +14,7 @@ const AllUser = () => {
     const fetchData = async () => {
       try {
         const data = await getAllUser();
-        setUserother(data);
-        
-        
+        setUserother(data.data);
       } catch (error) {
         console.error(error);
       }
@@ -66,8 +64,7 @@ const AllUser = () => {
                 }}
               >
                 <Avatar
-                  src={images}
-                  style={{ width: "70%", borderRadius: "100%" }}
+                  src={items.profil_pic ? `${items.profil_pic}` : images}
                 />
               </Box>
             </Box>

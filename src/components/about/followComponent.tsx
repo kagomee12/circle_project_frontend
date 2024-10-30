@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import { FollowersItem, FollowingItem } from '../common/followItem';
-import { Box, Typography } from '@mui/material';
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { FollowersItem, FollowingItem } from "../common/followItem";
+import { Box, Typography } from "@mui/material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,7 +36,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
@@ -47,11 +47,10 @@ export default function FullWidthTabs() {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     console.log(event);
-    
   };
 
   return (
-    <Box sx={{ bgcolor: '#1D1D1D', width: "100%",height: "100vh" }}>
+    <Box sx={{ bgcolor: "#1D1D1D", width: "100%", height: "100vh" }}>
       <AppBar position="static" color="success">
         <Tabs
           value={value}
@@ -63,17 +62,14 @@ export default function FullWidthTabs() {
         >
           <Tab label="Following" {...a11yProps(0)} />
           <Tab label="Followers" {...a11yProps(1)} />
-
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} dir={theme.direction}>
-      <FollowingItem/>
-        
+        <FollowingItem />
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
-      <FollowersItem/>
+        <FollowersItem />
       </TabPanel>
-
     </Box>
-  )
+  );
 }

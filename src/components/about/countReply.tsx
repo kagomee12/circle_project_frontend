@@ -12,8 +12,7 @@ export const GetReply: React.FC<replyProps> = ({parent_id}) => {
         () => {
             const FetchReply = async() => {
                 const result = await countReply(parent_id)
-                setCount(result.get)
-                
+                setCount(result.totalReplies)
             };
             FetchReply();
         },[count]

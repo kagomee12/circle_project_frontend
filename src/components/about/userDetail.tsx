@@ -10,12 +10,11 @@ const DetailUser = () => {
     const [userOther, setUserOther] = useState<IAllUser>();
     const {username} = useParams()
     const userName = username
-
     useEffect(
         ()=> {
             const fetchUser = async()=> {
                 const detailUser = await getUser(userName? userName : "notfound")
-                setUserOther(detailUser)
+                setUserOther(detailUser.data)
 
             };
             fetchUser()

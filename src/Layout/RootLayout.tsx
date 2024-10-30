@@ -6,7 +6,6 @@ import useStore from "../stores/hook";
 
 const RootLayout = () => {
   const { isLogin } = useStore();
-  // const { pathname } = useLocation()
 
   if (!isLogin) {
     return <Navigate to="/Login" />;

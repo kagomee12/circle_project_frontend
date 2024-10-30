@@ -16,7 +16,7 @@ const CommentItembyId = () => {
       try {
         const data = await getPostsbyId(parentId);
         
-        setContent(data);
+        setContent(data.data);
       } catch (error) {
         console.error(error);
       }

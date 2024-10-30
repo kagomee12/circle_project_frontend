@@ -18,7 +18,7 @@ const Media = () => {
       try {
         const data = await getPostsbyId(post_id);
         
-        setContent(data);
+        setContent(data.data);
       } catch (error) {
         console.error(error);
       }

@@ -9,18 +9,9 @@ import AllUser from "../Suggested/SuggestedData";
 
 function Profil() {
   const { user } = useStore();
-  console.log("ceking", user);
   
-
   const { username } = useParams();
 
-
-  // const [userName, setUserName] = useState<IUser>({fullName: "Hu tao", email: "",username: ""});
-
-  // useEffect(() => {
-  //   setUserName(userName);
-  //   console.log(userName);
-  // });
   return (
     <div
       style={{
@@ -30,11 +21,6 @@ function Profil() {
         flexDirection: "column",
       }}
     >
-      {/* <input
-        type="text"
-        value={userName.fullName}
-        onChange={(e) => setUserName({ ...userName, fullName: e.target.value })}
-      /> {userName.fullName} */}
       <Box
         sx={
           user.username == username

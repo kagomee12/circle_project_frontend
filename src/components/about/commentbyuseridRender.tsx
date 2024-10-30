@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect, useState } from "react";
 import { IContent } from "../../Types/content";
 import { getPostsbyUserId, getPostsimagesbyId } from "../../lib/api/call/post";
@@ -11,23 +11,18 @@ import { Timeinfo } from "../common/durationTime";
 import { GetReply } from "./countReply";
 import React from "react";
 
-
-
 interface IProps {
-    user_id: number
+  user_id: number;
 }
 
 export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
   const [content, setContent] = useState<IContent[]>([]);
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
-        
         const data = await getPostsbyUserId(user_id);
-        
-        setContent(data);
 
+        setContent(data.data);
       } catch (error) {
         console.error(error);
       }
@@ -36,11 +31,7 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
   }, []);
 
   if (content.length === 0) {
-    return (
-      <Box>
-        no post yet
-      </Box>
-    );
+    return <Box>no post yet</Box>;
   }
 
   return (
@@ -93,26 +84,26 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
                   @{item.author.username}
                 </Typography>
                 <Typography sx={{ color: "grey", fontSize: "17px" }}>
-                <Timeinfo time={new Date(item.createdAt)} />
+                  <Timeinfo time={new Date(item.createdAt)} />
                 </Typography>
               </Box>
               <Box>
                 <Typography sx={{ color: "grey" }}>{item.content}</Typography>
               </Box>
               <Box>
-              {item?.images && item.images.length > 0 && (
-            <ImageList sx={{ display: "flex" }}>
-              {item.images.map((image, index) => (
-                <ImageListItem key={index}>
-                  <img
-                    src={`${image.image}`}
-                    alt={`Post Image ${index + 1}`}
-                    style={{ width: "50%", height: "auto" }}
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          )}
+                {item?.images && item.images.length > 0 && (
+                  <ImageList sx={{ display: "flex" }}>
+                    {item.images.map((image, index) => (
+                      <ImageListItem key={index}>
+                        <img
+                          src={`${image.image}`}
+                          alt={`Post Image ${index + 1}`}
+                          style={{ width: "50%", height: "auto" }}
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                )}
               </Box>
               <Box sx={{ display: "flex", gap: "20px" }}>
                 <Typography>
@@ -141,67 +132,17 @@ export const CommentItembyuserId: React.FC<IProps> = ({ user_id }) => {
         ))}
       </Box>
     </>
-    );
+  );
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const StandardImageList: React.FC<IProps> = ({user_id}) => {
+export const StandardImageList: React.FC<IProps> = ({ user_id }) => {
   const [content, setContent] = useState<IContent[]>([]);
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
-        
         const data = await getPostsimagesbyId(user_id);
 
-        
-        setContent(data);
-
-        
-        
-
-
+        setContent(data.data);
       } catch (error) {
         console.error(error);
       }
@@ -211,7 +152,14 @@ export const StandardImageList: React.FC<IProps> = ({user_id}) => {
 
   if (content.length === 0) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", color: "white" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+        }}
+      >
         no post yet
       </Box>
     );
@@ -223,18 +171,16 @@ export const StandardImageList: React.FC<IProps> = ({user_id}) => {
         {content.map((item, index) => (
           <ImageListItem key={index}>
             <Link to={`/media/${item.id}`} style={{ textDecoration: "none" }}>
-            <img
-              src={`${item.images[0].image}`}
-              alt={`Post Image ${index + 1}`}
-              style={{ width: "100%", height: "auto" }}
-              loading="lazy"
-            />
+              <img
+                src={`${item.images[0].image}`}
+                alt={`Post Image ${index + 1}`}
+                style={{ width: "100%", height: "auto" }}
+                loading="lazy"
+              />
             </Link>
-         </ImageListItem>
+          </ImageListItem>
         ))}
       </ImageList>
     </>
-     
-  )
-}
-
+  );
+};
