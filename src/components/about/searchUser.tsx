@@ -1,7 +1,5 @@
 import { TextField, Stack, Box, Typography, Avatar } from "@mui/material";
-
 import { useEffect, useState } from "react";
-import images from "../../assets/images/pngwing.com.png";
 import { searchUser, getAllUser } from "../../lib/api/call/user";
 import useStore from "../../stores/hook";
 import FollowButton from "./followingButton";
