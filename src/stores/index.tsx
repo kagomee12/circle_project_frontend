@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, TStore } from "../Types/store";
 import { api } from "../lib/api";
+import { checkAuth } from "../lib/api/call/auth";
 
 interface StoreProps {
   children: React.ReactNode;
@@ -19,10 +20,14 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLogin(true);
-    }
+    const getUser = async () => {
+      const token = localStorage.getItem("token");
+      const user = await checkAuth(token ?? "");
+      if (user) {
+        setIsLogin(true);
+      }
+      getUser();
+    };
   }, []);
   const [post, setPost] = useState([]);
   const getPosts = async () => {
